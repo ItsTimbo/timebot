@@ -1,8 +1,6 @@
 import json
-
-import MySQLdb
 import mysql
-from MySQLdb import connect
+from MySQLdb import connect, cursors
 from mysql.connector import errorcode
 
 
@@ -19,7 +17,7 @@ class Model(object):
                 user=data['user'],
                 password=data['password'],
                 database=data['database'],
-                cursorclass=MySQLdb.cursors.DictCursor)
+                cursorclass=cursors.DictCursor)
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")

@@ -1,8 +1,6 @@
-from datetime import datetime
 from discord.ext import commands
 from discord import app_commands
 import discord
-import pytz
 from model import Model
 
 
@@ -19,7 +17,6 @@ class Config(commands.Cog):
         if timezone not in pytz.all_timezones:
             await interaction.response.send_message('Invalid timezone specified', ephemeral=True)
 
-        timezone_time = pytz.timezone(timezone)
         uid = interaction.user.id
         if target is not None and interaction.user.guild_permissions.administrator:
             uid = target.id
@@ -34,7 +31,7 @@ class Config(commands.Cog):
             await connection.updateUserTimezone(uid, timezone)
 
         await interaction.response.send_message(
-            f'Timezone set to {timezone}. Current time: {datetime.now(timezone_time).strftime("%H:%M:%S")}',
+            f'Timezone set to {timezone}.',
             ephemeral=True)
 
 
