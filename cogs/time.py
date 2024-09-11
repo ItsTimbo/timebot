@@ -29,15 +29,15 @@ class Time(commands.Cog):
         for timezone in timezones:
             uid_timezones[timezone['uid']] = timezone['timezone']
 
-        if target.id not in uid_timezones:
+        if str(interaction.user.id) not in uid_timezones:
             await interaction.response.send_message(
-                f'{target.display_name} does not have a Timezone set. They can set it with /set_timezone',
+                f'You don\'t have a Timezone set. You can set it with /set_timezone',
                 ephemeral=True
             )
 
-        if interaction.user.id not in uid_timezones:
+        if target is not None and str(target.id) not in uid_timezones:
             await interaction.response.send_message(
-                f'You don\'t have a Timezone set. You can set it with /set_timezone',
+                f'{target.display_name} does not have a Timezone set. They can set it with /set_timezone',
                 ephemeral=True
             )
 

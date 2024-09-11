@@ -1,8 +1,8 @@
 from discord.ext import commands
 from discord import app_commands
-import discord
 from model import Model
-
+import discord
+import pytz
 
 class Config(commands.Cog):
     def __init__(self, bot):
