@@ -28,6 +28,19 @@ class Time(commands.Cog):
         uid_timezones = {}
         for timezone in timezones:
             uid_timezones[timezone['uid']] = timezone['timezone']
+
+        if target.id not in uid_timezones:
+            await interaction.response.send_message(
+                f'{target.display_name} does not have a Timezone set. They can set it with /set_timezone',
+                ephemeral=True
+            )
+
+        if interaction.user.id not in uid_timezones:
+            await interaction.response.send_message(
+                f'You don\'t have a Timezone set. You can set it with /set_timezone',
+                ephemeral=True
+            )
+
         if target is None:
             await interaction.response.send_message(
                 f'Current Time: {datetime.now(pytz.timezone(uid_timezones[str(interaction.user.id)])).strftime("%H:%M:%S")}',
